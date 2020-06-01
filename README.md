@@ -3,9 +3,17 @@
 This repository contains the methodes that I have developped during my 2020
 internship in the Empenn team.
 
-# Technical details to run this code
+## Data
+This code is designed to analyze data collected from the LONGIDEP study. In
+this repository I provide some synthetical data in order to show how the
+code interacts (as in: *loads*, *displays*, *splits*, etc) with data. Those
+matrices, provided in the `fake_data/`, folder are not relevant for any
+kind of clinical study, and are just random matrices that somehow mimic the
+structure of real connectivity matrices.
 
-## Environment and dependancies
+## Technical details to run this code
+
+### Environment and dependancies
 
 The best way to run this code is to setup a Python3 virtual environment.
 
@@ -25,7 +33,7 @@ Install all dependancies:
 pip install -r requierements.txt
 ```
 
-## Notebooks
+### Notebooks
 
 Because pure notebook versioning is somehow a mess, they are handled using
 the `jupytext` extension (this should have been installed via `pip` if the
