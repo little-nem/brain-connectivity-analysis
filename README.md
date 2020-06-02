@@ -3,6 +3,13 @@
 This repository contains the methodes that I have developped during my 2020
 internship in the Empenn team.
 
+## Organization of the Repository
+The folder `wasserstein_analysis` contains code demonstrating the use of
+the Wasserstein distance, as well as the barycenter computation.
+
+* `wasserstein_analysis/demonstration.py` demonstrates the basic functions that I implemented.
+* *more files to come, implementing the experiments that I conducted.*
+
 ## Data
 This code is designed to analyze data collected from the LONGIDEP study. In
 this repository I provide some synthetical data in order to show how the
