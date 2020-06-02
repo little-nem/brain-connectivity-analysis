@@ -405,51 +405,6 @@ def laplacian_to_connectivity_matrix(laplacian):
 # ## Compute a distance matrix (distance subjects to controls)
 
 
-# +
-distance_matrix = np.zeros((subject_count, controls_count))
-
-pickle_path = pickle_folder + '/distance_matrix.pickle'
-
-if os.path.exists(pickle_path) and not recompute_pickle:
-    with open(pickle_path, 'rb') as pickle_file:
-        print("Loading the distance matrix from {}".format(pickle_path))
-        distance_matrix = pickle.load(pickle_file)
-        assert distance_matrix.shape == (subject_count, controls_count), \
-            "Pickled distance matrix need to be recomputed, set the recompute_pickle flag to True"
-
-else:
-    print("Compute a distance matrix. It might take some time.")
-    for subject_id, subject in enumerate(patients + controls):
-        if subject_id % 10 == 0:
-            print("Computing distance for subject {} / {}".format(subject_id, subject_count))
-
-        for control_id, control in enumerate(controls):
-            subject_matrix = connectivity_matrices[subject]
-            control_matrix = connectivity_matrices[control]
-            distance_matrix[subject_id, control_id] = wasserstein_networks(subject_matrix, control_matrix)
-    
-    with open(pickle_path, 'wb') as pickle_file:
-        print("Saving the distance matrix into {}".format(pickle_path))
-        pickle.dump(distance_matrix, pickle_file)
-# -
-
-print("Plotting the pairwise distance matrix")
-plt.imshow(distance_matrix)
-plt.colorbar()
-plt.show()
-
-# +
-print("Plotting distance distribution, from either the patient or the control cohort TO the control cohort.")
-
-plt.hist(distance_matrix[:patients_count].flatten(), bins=30,alpha=0.5, density=True, stacked=True, label="Patients")
-plt.hist(distance_matrix[patients_count:].flatten(), bins=30,alpha=0.5, density=True, stacked=True, label="Controls")
-sns.kdeplot(distance_matrix[:patients_count].flatten(), shade=True, color='C0', alpha=0.2);
-sns.kdeplot(distance_matrix[patients_count:].flatten(), shade=True, color='C1', alpha=0.2);
-
-plt.legend()
-plt.xlabel("Distance to control cohort")
-plt.show()
-# -
 # ## Compute a barycenter with subsample of controls
 
 
@@ -470,7 +425,7 @@ def subsample_controls(controls, sample_size, ratio = 1.0):
     return (controls_barycenter, pseudo_inverses)
 
 
-def do_some_folds(fold_count = 100, control_sample_size = 10, ratios = [1.0]):
+def do_some_folds(fold_count = 50, control_sample_size = 10, ratios = [1.0]):
     """
         Perform fold_count random folds. Each fold consists in: subsampling the 
         control group to randomly select control_sample_size controls, whose 
@@ -542,8 +497,8 @@ def do_some_folds(fold_count = 100, control_sample_size = 10, ratios = [1.0]):
         
         #threshold = 0.0025
         #print("Plot thresholded at {}".format(threshold))
-        plt.hist(dist_list[:patients_count], stacked=True, density=True, bins=25, alpha=0.3, label='Patients')
-        plt.hist(dist_list[patients_count:], stacked=True, density=True, bins=25, alpha = 0.3, label='Controls')
+        plt.hist(dist_list[:patients_count], stacked=True, density=True, alpha=0.3, label='Patients')
+        plt.hist(dist_list[patients_count:], stacked=True, density=True, alpha = 0.3, label='Controls')
         sns.kdeplot(dist_list[:patients_count], shade=False, color='C0', alpha=0.3);
         sns.kdeplot(dist_list[patients_count:], shade=False, color='C1', alpha=0.3);
         plt.xlabel("Distance to barycenter ({:.2f})".format(ratio))
