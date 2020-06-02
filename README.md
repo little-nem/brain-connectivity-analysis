@@ -8,7 +8,11 @@ The folder `wasserstein_analysis` contains code demonstrating the use of
 the Wasserstein distance, as well as the barycenter computation.
 
 * `wasserstein_analysis/demonstration.py` demonstrates the basic functions that I implemented.
-* *more files to come, implementing the experiments that I conducted.*
+* `wasserstein_analysis/distance_matrix.py` implements the comutation of a
+distance matrix between every subject and the control cohort
+* `wasserstein_analysis/barycenter_cross_validation.py` implements a comparison
+of the subject and of the patient cohort using a barycenter computation. Random
+k-fols are performed.
 
 ## Data
 This code is designed to analyze data collected from the LONGIDEP study. In
@@ -59,8 +63,12 @@ One can generate all the notebooks from a specific folder using (fish shell scri
 for file in *.py; jupytext --to notebook $file; end
 ```
 
-Note that light python scripts are correct python scripts, and they can be
-run without using a notebook.
+Note that light python scripts are valid python scripts, and they can thus be
+run without using a notebook as regular python files:
+
+```
+python barycenter_cross_validation.py
+```
 
 
-## Code is getting cleaned, and purged of non-releaseable data, and will appear here during the first week of June
+## Code is still cleaned, and purged of non-releaseable data, and will appear here during the first week of June
