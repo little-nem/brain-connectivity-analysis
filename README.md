@@ -5,10 +5,13 @@ internship in the Empenn team.
 
 ## Organization of the Repository
 The folder `wasserstein_analysis` contains code demonstrating the use of
-the Wasserstein distance, as well as the barycenter computation.
+the Wasserstein distance, as well as the barycenter computation. A binder
+link is available for the demo file, as it is quite lightweight. For the
+other ones, I recommend either to run them as python files, or to convert
+them locally to notebooks and run jupyter locally (see information below…).
 
-* `wasserstein_analysis/demonstration.py` demonstrates the basic functions that I implemented.
-* `wasserstein_analysis/distance_matrix.py` implements the comutation of a
+* `wasserstein_analysis/demonstration.py` demonstrates the basic functions that I implemented. [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/little-nem/brain-connectivity-analysis/master?filepath=wasserstein_analysis%2Fdemonstration.ipynb)
+* * `wasserstein_analysis/distance_matrix.py` implements the comutation of a
 distance matrix between every subject and the control cohort
 * `wasserstein_analysis/barycenter_cross_validation.py` implements a comparison
 of the subject and of the patient cohort using a barycenter computation. Random
